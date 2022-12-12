@@ -1,9 +1,46 @@
 <div class="container">
   <ng-container *ngIf="isLoggedIn; else showHome">
     <h1 class="display-4">{{ username }}</h1>
+    <div class="custom_container">
+      <div class="main_container">
+        <div class="text_container">
+          <h1 class="home_main" class="animate-charcter">SURVELLO</h1>
+        </div>
+          <img id="home_img" src="../../../assets/images/home.jpg" />  
+        <div class="btm_container">
+       
+    
+           <button class="button-56" role="button" onclick="location.href='/surveys'">Take a Survey</button>
+           <button class="button-56" role="button" onclick="location.href='/login'">Login</button>
+    
+         
+        </div>
+      </div>
+    
+    
+    </div>
+    
   </ng-container>
 
   <ng-template #showHome>
-    <h1 class="display-4">Home</h1>
+    <div class="custom_container">
+      <div class="main_container">
+        <div class="text_container">
+          <h1 class="home_main" class="animate-charcter">SURVELLO</h1>
+        </div>
+          <img id="home_img" src="../../../assets/images/home.jpg" />  
+        <div class="btm_container">
+       
+    
+           <button class="button-56" role="button" onclick="location.href='/surveys'">Take a Survey</button>
+           <button class="button-56" role="button" onclick="location.href='/login'">Login</button>
+    
+         
+        </div>
+      </div>
+    
+    
+    </div>
+    
   </ng-template>
 </div>

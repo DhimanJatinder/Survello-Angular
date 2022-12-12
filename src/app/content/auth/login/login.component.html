@@ -65,25 +65,22 @@
               Password is required
             </div>
           </div>
-          <div class="text-end">
-            <button
-              id="loginButton"
-              type="submit"
-              class="btn btn-primary btn-lg"
-            >
+          <div class="button_area">
+            <button id="loginButton"type="submit"class="buttonl">
               <i class="fas fa-sign-in-alt"></i> Login
             </button>
             <button
               id="cancelButton"
               type="reset"
-              class="btn btn-warning btn-lg"
+              class="buttonl"
+              onclick="window.location.href='/home'"
             >
               <i class="fas fa-undo"></i> Cancel
             </button>
           </div>
         </form>
       </div>
-      <p class="text-center text-muted small">
+      <p class="register_prompt">
         Don't have an account?
         <a class="link" href="/register" routerLink="/register"
           >Register Here!</a

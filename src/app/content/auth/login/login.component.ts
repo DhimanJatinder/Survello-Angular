@@ -29,17 +29,17 @@ export class LoginComponent implements OnInit {
       this.isLoggedIn = true;
     }
   }
-
+  //Submission for form for login
   onSubmit(): void {
     const { username, password } = this.form;
     this.authService.login(username, password).subscribe({
-      next: (data) => {
+      next: (data : any) => {
         this.tokenStorage.saveToken(data.token);
         this.tokenStorage.saveUser(data.user);
         this.isLoginFailed = false;
         this.goToHome();
       },
-      error: (err) => {
+      error: (err : any) => {
         this.errorMessage = err.error.message;
         this.isLoginFailed = true;
       },

@@ -12,6 +12,7 @@ export class HeaderComponent implements OnInit {
 
   constructor(private tokenStorage: TokenStorageService) {}
 
+  //Loggged in does not validate the user being logged in
   ngOnInit(): void {
     this.isLoggedIn = !!this.tokenStorage.getToken();
 
