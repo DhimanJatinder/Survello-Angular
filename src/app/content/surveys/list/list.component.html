@@ -28,7 +28,8 @@
             <th scope="col" *ngIf="isLoggedIn"></th>
           </tr>
         </thead>
-        <tbody id="movieList">
+        <tbody id="surveyList">
+          <!--MOVIELIST WAS CHANGED TO SURVEYLIST HERE, FOR ERROR CHECKING-->
           <!-- Repeatable Rows -->
           <tr *ngFor="let survey of surveys">
             <td>{{ survey["title"] }}</td>
