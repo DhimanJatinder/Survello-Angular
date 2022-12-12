@@ -1,0 +1,63 @@
+<div class="container">
+  <h1 class="display-4">Survey List</h1>
+  <hr />
+
+  <a
+    routerLink="/add"
+    href="/add"
+    class="btn btn-primary mb-3"
+    role="button"
+    *ngIf="isLoggedIn"
+  >
+    <i class="fas fa-plus-circle"></i> Create Survey</a
+  >
+
+  <div class="row">
+    <div class="col">
+      <table
+        *ngIf="!hasError"
+        class="table table-striped table-bordered table-hover"
+      >
+        <thead class="table-dark">
+          <tr>
+            <th scope="col">Title</th>
+            <th scope="col">Description</th>
+            <th scope="col">Survey Type</th>
+            <th scope="col">Action</th>
+            <th scope="col" *ngIf="isLoggedIn"></th>
+            <th scope="col" *ngIf="isLoggedIn"></th>
+          </tr>
+        </thead>
+        <tbody id="movieList">
+          <!-- Repeatable Rows -->
+          <tr *ngFor="let survey of surveys">
+            <td>{{ survey["title"] }}</td>
+            <td>{{ survey["description"] }}</td>
+            <td>{{ survey["surveyType"] }}</td>
+            <td>
+              <button class="btn btn-primary btn-sm">Start Survey</button>
+            </td>
+
+            <td *ngIf="isLoggedIn" class="text-center col-1">
+              <button
+                class="btn btn-primary btn-sm"
+                (click)="editSurvey(survey['_id'])"
+              >
+                <i class="fas fa-pencil-alt"></i> Edit
+              </button>
+            </td>
+
+            <td *ngIf="isLoggedIn" class="text-center col-1">
+              <button
+                class="btn btn-danger btn-sm"
+                (click)="deleteSurvey(survey['_id'])"
+              >
+                <i class="fas fa-pencil-alt"></i> Delete
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

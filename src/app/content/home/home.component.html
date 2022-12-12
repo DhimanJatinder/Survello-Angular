@@ -1,0 +1,9 @@
+<div class="container">
+  <ng-container *ngIf="isLoggedIn; else showHome">
+    <h1 class="display-4">{{ username }}</h1>
+  </ng-container>
+
+  <ng-template #showHome>
+    <h1 class="display-4">Home</h1>
+  </ng-template>
+</div>

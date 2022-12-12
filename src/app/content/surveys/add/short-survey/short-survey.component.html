@@ -1,0 +1,77 @@
+<div class="container">
+  <div class="row">
+    <h1 class="display-6">Short Answer Survey</h1>
+    <hr />
+  </div>
+  <div class="row">
+    <p class="lead text-center">Enter the survey details</p>
+  </div>
+  <form [formGroup]="shortForm" class="shortForm" (ngSubmit)="onSubmit()">
+    <div class="shortFormGroup">
+      <div class="mb-3">
+        <label for="title" class="form-label">Survey Title</label>
+        <input
+          formControlName="title"
+          type="email"
+          class="form-control"
+          id="title"
+        />
+      </div>
+
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label"
+          >Survey Description</label
+        >
+        <input
+          formControlName="description"
+          type="text"
+          class="form-control"
+          id="desc"
+        />
+      </div>
+      <div class="text-center">
+        <button
+          type="button"
+          class="btn btn-primary btn-lg"
+          (click)="addQues()"
+        >
+          Add Question
+        </button>
+      </div>
+    </div>
+
+    <div formArrayName="content">
+      <div
+        *ngFor="let question of content.controls; let i = index"
+        [formGroupName]="i"
+      >
+        <div class="form-group question">
+          <label class="m-1 lead">Question {{ i + 1 }}</label>
+
+          <input
+            formControlName="question"
+            class="form-control"
+            type="text"
+            id="i"
+          />
+          <div class="text-center">
+            <button
+              type="button"
+              class="btn btn-danger m-2"
+              (click)="delQues(i)"
+            >
+              Delete
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center">
+      <button type="submit" class="btn btn-success btn-lg m-3">Submit</button>
+      <button routerLink="/add" type="reset" class="btn btn-danger btn-lg m-3">
+        Cancel
+      </button>
+    </div>
+  </form>
+</div>
