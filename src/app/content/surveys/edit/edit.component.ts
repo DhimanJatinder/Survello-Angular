@@ -18,6 +18,7 @@ import { takeUntil } from 'rxjs';
 export class EditComponent implements OnInit {
   isSuccessfull = true;
   errorMessage = '';
+  multiSurveyType = false;
 
   constructor(
     private surveyService: SurveyService,
@@ -38,6 +39,14 @@ export class EditComponent implements OnInit {
     return this.survey.get('content') as FormArray;
   }
 
+  trackByFn(index: number, obj: any): any {
+    return index;
+  }
+
+  backToList(): void {
+    this.router.navigate(['list']);
+  }
+
   ngOnInit(): void {
     this.route.params.subscribe({
       next: (params) => {
@@ -48,6 +57,10 @@ export class EditComponent implements OnInit {
             //console.log(data);
 
             this.survey = data.survey;
+            if (this.survey.surveyType === 'Multiple Choice') {
+              this.multiSurveyType = true;
+            }
+
             console.log(this.survey);
           },
           error: (err) => {
@@ -76,12 +89,5 @@ export class EditComponent implements OnInit {
     });
 
     console.log(this.survey);
-  }
-  trackByFn(index: number, obj: any): any {
-    return index;
-  }
-
-  backToList(): void {
-    this.router.navigate(['list']);
   }
 }

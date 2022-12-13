@@ -4,7 +4,9 @@
     <hr />
   </div>
   <div class="row">
-    <p class="lead text-center">Enter the survey details</p>
+    <p class="lead text-center">
+      Change your survey and click Update to save changes
+    </p>
   </div>
   <form #f="ngForm" class="agreeForm" (ngSubmit)="onSubmit()">
     <div class="agreeFormGroup">
@@ -21,9 +23,7 @@
       </div>
 
       <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label"
-          >Survey Description</label
-        >
+        <label for="description" class="form-label">Survey Description</label>
         <input
           [(ngModel)]="survey.description"
           #description="ngModel"
@@ -33,12 +33,15 @@
           id="desc"
         />
       </div>
+      <!--
       <div class="text-center">
         <button type="button" class="btn btn-primary btn-lg">
           Add Question
         </button>
       </div>
+      -->
     </div>
+    <ng-container> </ng-container>
 
     <div
       *ngFor="let question of survey.content; let i = index; trackBy: trackByFn"
@@ -47,18 +50,55 @@
         <label class="m-1 lead"> Question {{ i + 1 }}</label>
 
         <input
-          [(ngModel)]="survey.content[i]"
+          [(ngModel)]="survey.content[i]['question']"
           #content="ngModel"
           name="question{{ i }}"
           class="form-control"
           type="text"
           id="i"
         />
+        <ng-container *ngIf="multiSurveyType">
+          <label class="m-1 lead">Options for answer</label>
+          <div class="input-group">
+            <input
+              [(ngModel)]="survey.content[i]['option1']"
+              #content="ngModel"
+              name="option{{ i }}{{ i + 1 }}"
+              class="form-control"
+              type="text"
+              placeholder="Option 1"
+            />
+            <input
+              [(ngModel)]="survey.content[i]['option2']"
+              #content="ngModel"
+              name="option{{ i }}{{ i + 2 }}"
+              class="form-control"
+              type="text"
+              placeholder="Option 2"
+            />
+            <input
+              [(ngModel)]="survey.content[i]['option3']"
+              #content="ngModel"
+              name="option{{ i }}{{ i + 3 }}"
+              class="form-control"
+              type="text"
+              placeholder="Option 3"
+            />
+            <input
+              [(ngModel)]="survey.content[i]['option4']"
+              #content="ngModel"
+              name="option{{ i }}{{ i + 4 }}"
+              class="form-control"
+              type="text"
+              placeholder="Option 4"
+            />
+          </div>
+        </ng-container>
       </div>
     </div>
 
     <div class="text-center">
-      <button type="submit" class="btn btn-success btn-lg m-3">Submit</button>
+      <button type="submit" class="btn btn-success btn-lg m-3">Update</button>
       <button routerLink="/add" type="reset" class="btn btn-danger btn-lg m-3">
         Cancel
       </button>

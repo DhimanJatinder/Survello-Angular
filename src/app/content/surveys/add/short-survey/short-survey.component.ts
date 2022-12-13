@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { SurveyService } from 'src/app/services/survey.service';
 
@@ -34,7 +40,9 @@ export class ShortSurveyComponent implements OnInit {
       answer: ['', Validators.required],
     });
   }
+
   addQues() {
+    //const control = new FormControl(null, Validators.required);
     this.content.push(this.newQues());
   }
   delQues(quesIndex: number) {

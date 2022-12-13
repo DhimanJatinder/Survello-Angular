@@ -34,10 +34,15 @@ export class AgreeSurveyComponent implements OnInit {
   get content(): FormArray {
     return this.agreeForm.get('content') as FormArray;
   }
-
+  newQues(): FormGroup {
+    return this.fb.group({
+      question: ['', Validators.required],
+      options: [['Agree', 'Disagree', 'Neutral'], Validators.required],
+    });
+  }
   addQues() {
-    const control = new FormControl(null, Validators.required);
-    this.content.push(control);
+    //const control = new FormControl(null,Validators.required);
+    this.content.push(this.newQues());
   }
   delQues(quesIndex: number) {
     this.content.removeAt(quesIndex);
