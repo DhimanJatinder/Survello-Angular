@@ -24,6 +24,7 @@ export class ListComponent implements OnInit {
     this.surveyService.getSurveysList().subscribe({
       next: (data : any) => {
         this.surveys = data.surveys;
+        console.log(this.surveys);
         this.hasError = false;
       },
       error: (err : any) => {

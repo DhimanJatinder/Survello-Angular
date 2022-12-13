@@ -14,10 +14,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { authInterceptorProvider } from './_helpers/auth.interceptor';
 import { ListComponent } from './content/surveys/list/list.component';
 import { AddComponent } from './content/surveys/add/add.component';
-import { EditComponent } from './content/surveys/edit/edit.component';
 import { AgreeSurveyComponent } from './content/surveys/add/agree-survey/agree-survey.component';
 import { MultiSurveyComponent } from './content/surveys/add/multi-survey/multi-survey.component';
 import { ShortSurveyComponent } from './content/surveys/add/short-survey/short-survey.component';
+import { EditComponent } from './content/surveys/edit/edit.component';
 
 @NgModule({
   declarations: [
@@ -30,10 +30,10 @@ import { ShortSurveyComponent } from './content/surveys/add/short-survey/short-s
     FooterComponent,
     ListComponent,
     AddComponent,
-    EditComponent,
     AgreeSurveyComponent,
     MultiSurveyComponent,
     ShortSurveyComponent,
+    EditComponent
   ],
   imports: [
     BrowserModule,

@@ -6,10 +6,10 @@ import { LoginComponent } from './content/auth/login/login.component';
 import { RegisterComponent } from './content/auth/register/register.component';
 import { ListComponent } from './content/surveys/list/list.component';
 import { AddComponent } from './content/surveys/add/add.component';
-import { EditComponent } from './content/surveys/edit/edit.component';
 import { AgreeSurveyComponent } from './content/surveys/add/agree-survey/agree-survey.component';
 import { MultiSurveyComponent } from './content/surveys/add/multi-survey/multi-survey.component';
 import { ShortSurveyComponent } from './content/surveys/add/short-survey/short-survey.component';
+import { EditComponent } from './content/surveys/edit/edit.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -22,7 +22,7 @@ const routes: Routes = [
   { path: 'add/agree-survey', component: AgreeSurveyComponent },
   { path: 'add/multi-survey', component: MultiSurveyComponent },
   { path: 'add/short-survey', component: ShortSurveyComponent },
-  { path: 'edit/ :id', component: EditComponent },
+  { path: 'edit/:id', component: EditComponent}
 ];
 
 @NgModule({

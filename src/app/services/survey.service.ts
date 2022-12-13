@@ -29,10 +29,8 @@ export class SurveyService {
   }
   //edit a survey
   editSurvey(survey: any): Observable<any> {
-    return this.httpClient.put(
-      SURVEY_API + 'edit/' + survey['_id'],
-      httpOptions
-    );
+    console.log(httpOptions);
+    return this.httpClient.put(SURVEY_API + 'edit/' + survey['_id'],httpOptions);
   }
   //delete as survey
   deleteSurvey(id: string): Observable<any> {
