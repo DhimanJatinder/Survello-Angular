@@ -33,7 +33,7 @@ import { EditComponent } from './content/surveys/edit/edit.component';
     AgreeSurveyComponent,
     MultiSurveyComponent,
     ShortSurveyComponent,
-    EditComponent
+    EditComponent,
   ],
   imports: [
     BrowserModule,

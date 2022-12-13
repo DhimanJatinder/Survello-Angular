@@ -22,12 +22,12 @@ export class ListComponent implements OnInit {
   ngOnInit(): void {
     this.isLoggedIn = !!this.tokenStorage.getToken();
     this.surveyService.getSurveysList().subscribe({
-      next: (data : any) => {
+      next: (data: any) => {
         this.surveys = data.surveys;
-        console.log(this.surveys);
+        //console.log(this.surveys);
         this.hasError = false;
       },
-      error: (err : any) => {
+      error: (err: any) => {
         this.hasError = true;
       },
     });
@@ -38,10 +38,10 @@ export class ListComponent implements OnInit {
   }
   deleteSurvey(id: string): void {
     this.surveyService.deleteSurvey(id).subscribe({
-      next: (data : any) => {
+      next: (data: any) => {
         this.reloadPage();
       },
-      error: (err : any) => {
+      error: (err: any) => {
         this.hasError = true;
       },
     });

@@ -41,15 +41,12 @@
     </div>
 
     <div formArrayName="content">
-      <div
-        *ngFor="let question of content.controls; let i = index"
-        [formGroupName]="i"
-      >
+      <div *ngFor="let question of content.controls; let i = index">
         <div class="form-group question">
           <label class="m-1 lead">Question {{ i + 1 }}</label>
 
           <input
-            formControlName="question"
+            [formControlName]="i"
             class="form-control"
             type="text"
             id="i"

@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { SurveyService } from 'src/app/services/survey.service';
 
@@ -28,14 +34,10 @@ export class AgreeSurveyComponent implements OnInit {
   get content(): FormArray {
     return this.agreeForm.get('content') as FormArray;
   }
-  newQues(): FormGroup {
-    return this.fb.group({
-      question: ['', Validators.required],
-      options: [['Agree', 'Disagree', 'Neutral'], Validators.required],
-    });
-  }
+
   addQues() {
-    this.content.push(this.newQues());
+    const control = new FormControl(null, Validators.required);
+    this.content.push(control);
   }
   delQues(quesIndex: number) {
     this.content.removeAt(quesIndex);
@@ -43,7 +45,7 @@ export class AgreeSurveyComponent implements OnInit {
   onSubmit(): void {
     this.surveyService.addSurvey(this.agreeForm.value).subscribe({
       next: (data) => {
-        console.log(data);
+        //console.log(data);
         this.isSuccessfull = true;
         this.backToList();
       },
@@ -52,7 +54,7 @@ export class AgreeSurveyComponent implements OnInit {
         this.isSuccessfull = false;
       },
     });
-    console.log(this.agreeForm.value);
+    // console.log(this.agreeForm.value);
   }
 
   backToList(): void {

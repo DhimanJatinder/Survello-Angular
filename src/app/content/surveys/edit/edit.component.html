@@ -1,283 +1,67 @@
 <div class="container">
-    <div class="row">
-        <div class="offset-md-3 col-md-6">
-     
+  <div class="row">
+    <h1 class="display-6">Edit Survey {{ survey.surveyType }}</h1>
+    <hr />
+  </div>
+  <div class="row">
+    <p class="lead text-center">Enter the survey details</p>
+  </div>
+  <form #f="ngForm" class="agreeForm" (ngSubmit)="onSubmit()">
+    <div class="agreeFormGroup">
+      <div class="mb-3">
+        <label for="title" class="form-label">Survey Title</label>
+        <input
+          [(ngModel)]="survey.title"
+          #title="ngModel"
+          name="title"
+          type="email"
+          class="form-control"
+          id="title"
+        />
+      </div>
 
-            <div *ngIf="survey.surveyType === 'Agree/Disagree'">               
-                <div class="container">
-                    <div class="row">
-                      <h1 class="display-6">Edit: Agree Disagree Survey</h1>
-                      <hr />
-                    </div>
-                    <div class="row">
-                      <p class="lead text-center">Enter the survey details</p>
-                    </div>
-                    <form [formGroup]="editFormAgree" class="editFormAgree" (ngSubmit)="onSubmitAgree()">
-                      <div class="editFormAgreeGroup">
-                        <div class="mb-3">
-                          <label for="title" class="form-label">Survey Title</label>
-                          <input
-                            formControlName="title"
-                            type="email"
-                            class="form-control"
-                            id="title"
-                            placeholder="{{editFormAgree.value.title}}"
-                          />
-                        </div>
-                  
-                        <div class="mb-3">
-                          <label for="exampleInputPassword1" class="form-label">Survey Description</label>
-                          <input
-                            formControlName="description"
-                            type="text"
-                            class="form-control"
-                            id="desc"
-                            placeholder="{{editFormAgree.value.description}}"
-                          />
-                        </div>
-                        <div class="text-center">
-                          <button
-                            type="button"
-                            class="btn btn-primary btn-lg"
-                            (click)="addQuesAgree()"
-                          >
-                            Add Question
-                          </button>
-                        </div>
-                      </div>
-                  
-                      <div formArrayName="agreeContent">
-                        <div
-                          *ngFor="let question of agreeContent.controls; let i = index"
-                          [formGroupName]="i"
-                        >
-                          <div class="form-group question">
-                            <label class="m-1 lead">Question {{ i + 1 }}</label>
-                  
-                            <input
-                              formControlName="question"
-                              class="form-control"
-                              type="text"
-                              id="i"
-                            />
-                            <div class="text-center">
-                              <button
-                                type="button"
-                                class="btn btn-danger m-2"
-                                (click)="delQuesAgree(i)"
-                              >
-                                Delete
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                  
-                      <div class="text-center">
-                        <button type="submit" class="btn btn-success btn-lg m-3">Submit</button>
-                        <button routerLink="/list" type="reset" class="btn btn-danger btn-lg m-3">
-                          Cancel
-                        </button>
-                      </div>
-                    </form>
-                </div>
-           
-            </div>
-            <div *ngIf="survey.surveyType === 'Multiple Choice'">
-                <div class="container">
-                    <div class="row">
-                      <h1 class="display-6">Editing: Multiple Choice Survey</h1>
-                      <hr />
-                    </div>
-                    <div class="row">
-                      <p class="lead text-center">Enter the survey details</p>
-                    </div>
-                    <form [formGroup]="editFormMulti" class="editFormMulti" (ngSubmit)="onSubmitMulti()">
-                      <div class="editFormMulti">
-                        <div class="mb-3">
-                          <label for="title" class="form-label">Survey Title</label>
-                          <input
-                            formControlName="title"
-                            type="email"
-                            class="form-control"
-                            id="title"
-                            placeholder="{{editFormMulti.value.title}}"
-                          />
-                        </div>
-                  
-                        <div class="mb-3">
-                          <label for="exampleInputPassword1" class="form-label"
-                            >Survey Description</label
-                          >
-                          <input
-                            formControlName="description"
-                            type="text"
-                            class="form-control"
-                            id="desc"
-                            placeholder="{{editFormMulti.value.description}}"
-                          />
-                        </div>
-                        <div class="text-center">
-                          <button
-                            type="button"
-                            class="btn btn-primary btn-lg"
-                            (click)="addQuesMulti()"
-                          >
-                            Add Question
-                          </button>
-                        </div>
-                      </div>
-                  
-                      <div formArrayName="multiContent">
-                        <div
-                          *ngFor="let question of multiContent.controls; let i = index"
-                          [formGroupName]="i"
-                        >
-                          <div class="form-group question">
-                            <label class="m-1 lead">Question {{ i + 1 }}</label>
-                  
-                            <input
-                              formControlName="question"
-                              class="form-control"
-                              type="text"
-                              id="i"
-                            />
-                            <label class="m-1 lead">Options for answer</label>
-                            <div class="input-group">
-                              <input
-                                formControlName="option1"
-                                class="form-control"
-                                type="text"
-                                placeholder="Option 1"
-                              />
-                              <input
-                                formControlName="option2"
-                                class="form-control"
-                                type="text"
-                                placeholder="Option 2"
-                              />
-                              <input
-                                formControlName="option3"
-                                class="form-control"
-                                type="text"
-                                placeholder="Option 3"
-                              />
-                              <input
-                                formControlName="option4"
-                                class="form-control"
-                                type="text"
-                                placeholder="Option 4"
-                              />
-                            </div>
-                  
-                            <div class="text-center">
-                              <button
-                                type="button"
-                                class="btn btn-danger m-2"
-                                (click)="delQuesMulti(i)"
-                              >
-                                Delete
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                  
-                      <div class="text-center">
-                        <button type="submit" class="btn btn-success btn-lg m-3">Submit</button>
-                        <button routerLink="/list" type="reset" class="btn btn-danger btn-lg m-3">
-                          Cancel
-                        </button>
-                      </div>
-                    </form>
-                  </div>
-                  
-            </div>
-            <div *ngIf="survey.surveyType === 'Short Answer'">
-                <div class="container">
-                    <div class="row">
-                      <h1 class="display-6">Short Answer Survey</h1>
-                      <hr />
-                    </div>
-                    <div class="row">
-                      <p class="lead text-center">Enter the survey details</p>
-                    </div>
-                    <form [formGroup]="editFormShort" class="editFormShort" (ngSubmit)="onSubmitShort()">
-                      <div class="editFormShortGroup">
-                        <div class="mb-3">
-                          <label for="title" class="form-label">Survey Title</label>
-                          <input
-                            formControlName="title"
-                            type="email"
-                            class="form-control"
-                            id="title"
-                            placeholder="{{editFormShort.value.title}}"
-                          />
-                        </div>
-                  
-                        <div class="mb-3">
-                          <label for="exampleInputPassword1" class="form-label"
-                            >Survey Description</label
-                          >
-                          <input
-                            formControlName="description"
-                            type="text"
-                            class="form-control"
-                            id="desc"
-                            placeholder="{{editFormShort.value.description}}"
-
-                          />
-                        </div>
-                        <div class="text-center">
-                          <button
-                            type="button"
-                            class="btn btn-primary btn-lg"
-                            (click)="addQuesShort()"
-                          >
-                            Add Question
-                          </button>
-                        </div>
-                      </div>
-                  
-                      <div formArrayName="shortContent">
-                        <div
-                          *ngFor="let question of shortContent.controls; let i = index"
-                          [formGroupName]="i"
-                        >
-                          <div class="form-group question">
-                            <label class="m-1 lead">Question {{ i + 1 }}</label>
-                  
-                            <input
-                              formControlName="question"
-                              class="form-control"
-                              type="text"
-                              id="i"
-                            />
-                            <div class="text-center">
-                              <button
-                                type="button"
-                                class="btn btn-danger m-2"
-                                (click)="delQuesShort(i)"
-                              >
-                                Delete
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                  
-                      <div class="text-center">
-                        <button type="submit" class="btn btn-success btn-lg m-3">Submit</button>
-                        <button routerLink="/list" type="reset" class="btn btn-danger btn-lg m-3">
-                          Cancel
-                        </button>
-                      </div>
-                    </form>
-                  </div>
-                  
-            </div>
-    
-        </div>
-
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label"
+          >Survey Description</label
+        >
+        <input
+          [(ngModel)]="survey.description"
+          #description="ngModel"
+          name="description"
+          type="text"
+          class="form-control"
+          id="desc"
+        />
+      </div>
+      <div class="text-center">
+        <button type="button" class="btn btn-primary btn-lg">
+          Add Question
+        </button>
+      </div>
     </div>
+
+    <div
+      *ngFor="let question of survey.content; let i = index; trackBy: trackByFn"
+    >
+      <div class="form-group question">
+        <label class="m-1 lead"> Question {{ i + 1 }}</label>
+
+        <input
+          [(ngModel)]="survey.content[i]"
+          #content="ngModel"
+          name="question{{ i }}"
+          class="form-control"
+          type="text"
+          id="i"
+        />
+      </div>
+    </div>
+
+    <div class="text-center">
+      <button type="submit" class="btn btn-success btn-lg m-3">Submit</button>
+      <button routerLink="/add" type="reset" class="btn btn-danger btn-lg m-3">
+        Cancel
+      </button>
+    </div>
+  </form>
 </div>
