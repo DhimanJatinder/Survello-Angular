@@ -41,58 +41,45 @@
                 name="question"
                 disabled
                 >
+                <div >
+                <ng-container *ngIf="agreeSurveyType">
+                  <input id= "agree{{i}}" type="radio" name="answer+{{i}}" [(ngModel)]="agreeFormComplete" value="Agree">Agree
+                  <input id= "disagree{{i}}" type="radio" name="answer+{{i}}" [(ngModel)]="agreeFormComplete" value="Disagree">Disagree
+                  <input id= "neutral{{i}}" type="radio" name="answer+{{i}}" [(ngModel)]="agreeFormComplete" value="Neutral">Neutral
+                </ng-container>
+                </div>
+          
+                
+                <ng-container *ngIf="shortSurveyType">
+                  <textarea class="form-control" rows="4" cols="50"
+                  class="shortResponse"
+                  placeholder="Please input your answer"
+                  name="question answer"
+                  required
+                  ></textarea>
+                </ng-container>
+         
                 <ng-container *ngIf="multiSurveyType">
                   <label class="m-1 lead">Options for answer</label>
                   <div class="input-group">
-                    <input
-                      [(ngModel)]="survey.content[i]['option1']"
-                      #content="ngModel"
-                      name="option{{ i }}{{ i + 1 }}"
-                      class="form-control"
-                      type="text"
-                      placeholder="Option 1"
-                      disabled
-                    />
-                    <input
-                      [(ngModel)]="survey.content[i]['option2']"
-                      #content="ngModel"
-                      name="option{{ i }}{{ i + 2 }}"
-                      class="form-control"
-                      type="text"
-                      placeholder="Option 2"
-                      disabled
-                    />
-                    <input
-                      [(ngModel)]="survey.content[i]['option3']"
-                      #content="ngModel"
-                      name="option{{ i }}{{ i + 3 }}"
-                      class="form-control"
-                      type="text"
-                      placeholder="Option 3"
-                      disabled
-                    />
-                    <input
-                      [(ngModel)]="survey.content[i]['option4']"
-                      #content="ngModel"
-                      name="option{{ i }}{{ i + 4 }}"
-                      class="form-control"
-                      type="text"
-                      placeholder="Option 4"
-                      disabled
-                    />
+                    <input id= "option1-{{i}}" type="radio" name="answer+{{i}}" [(ngModel)]="agreeFormComplete" value="survey.content[i]['option1']">{{survey.content[i]['option1']}}
+                    <input id= "option2-{{i}}" type="radio" name="answer+{{i}}" [(ngModel)]="agreeFormComplete" value="{{survey.content[i]['option2']}}">{{survey.content[i]['option2']}}
+                    <input id= "option3-{{i}}" type="radio" name="answer+{{i}}" [(ngModel)]="agreeFormComplete" value="{{survey.content[i]['option3']}}">{{survey.content[i]['option3']}}
+                    <input id= "option4-{{i}}" type="radio" name="answer+{{i}}" [(ngModel)]="agreeFormComplete" value="{{survey.content[i]['option4']}}">{{survey.content[i]['option4']}}
                   </div>
                 </ng-container>
-                <div *ngIf="survey" class="form-group">
-                  <label for="feedbackTextArea">Survey Feedback:</label>
-                  <textarea class="form-control" rows="4" cols="50"
-                  id="feedbackTextArea"
-                  [(ngModel)] = "survey.content[0].feedback"
-                  placeholder="Please enter feedback"
-                  name="feedback"
-                  required
-                  ></textarea>
-                </div>
+        
 
+              </div>
+              <div *ngIf="survey" class="form-group">
+                <label for="feedbackTextArea">Survey Feedback:</label>
+                <textarea class="form-control" rows="4" cols="50"
+                id="feedbackTextArea"
+                [(ngModel)] = "survey.content[0].feedback"
+                placeholder="Please enter feedback"
+                name="feedback"
+                required
+                ></textarea>
               </div>
               <button type="submit" class="btn btn-success btn-lg m-3">Post Feedback</button>
             </div>
