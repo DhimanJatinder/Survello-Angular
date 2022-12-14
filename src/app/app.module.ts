@@ -19,6 +19,7 @@ import { MultiSurveyComponent } from './content/surveys/add/multi-survey/multi-s
 import { ShortSurveyComponent } from './content/surveys/add/short-survey/short-survey.component';
 import { EditComponent } from './content/surveys/edit/edit.component';
 import { StartComponent } from './content/surveys/start/start.component';
+import { ModifyComponent } from './content/auth/modify/modify.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { StartComponent } from './content/surveys/start/start.component';
     ShortSurveyComponent,
     EditComponent,
     StartComponent,
+    ModifyComponent,
   ],
   imports: [
     BrowserModule,

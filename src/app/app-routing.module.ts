@@ -11,6 +11,7 @@ import { MultiSurveyComponent } from './content/surveys/add/multi-survey/multi-s
 import { ShortSurveyComponent } from './content/surveys/add/short-survey/short-survey.component';
 import { StartComponent } from './content/surveys/start/start.component';
 import { EditComponent } from './content/surveys/edit/edit.component';
+import { ModifyComponent } from './content/auth/modify/modify.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -24,7 +25,8 @@ const routes: Routes = [
   { path: 'add/multi-survey', component: MultiSurveyComponent },
   { path: 'add/short-survey', component: ShortSurveyComponent },
   { path: 'edit/:id', component: EditComponent },
-  { path: 'start/:id', component: StartComponent }
+  { path: 'start/:id', component: StartComponent },
+  { path: 'modify/:id', component: ModifyComponent}
 
 ];
 

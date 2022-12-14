@@ -8,7 +8,9 @@ import { TokenStorageService } from 'src/app/services/token-storage.service';
 })
 export class HeaderComponent implements OnInit {
   isLoggedIn = false;
-  username?: string;
+  userName = null;
+  displayName = null;
+  id = null;
 
   constructor(private tokenStorage: TokenStorageService) {}
 
@@ -18,9 +20,12 @@ export class HeaderComponent implements OnInit {
 
     if (this.isLoggedIn) {
       const user: any = this.tokenStorage.getUser();
-      let str = "";
       console.log(user);
-      this.username = user.username;
+      this.userName = user.username;
+      this.displayName = user.displayName;
+      this.id = user.id;
+      
+      console.log(this.displayName, this.userName, this.id);
     }
   }
   logOut(): void {

@@ -22,24 +22,48 @@ export class AuthService {
       httpOptions
     );
   }
+//QUESTIONABLE
+  public getUser(id: String): Observable<any> {
+    return this.httpClient.get(AUTH_API + id, httpOptions);
+  }
   //register
   public register(
-    uniqueId: any,
+    id: any,
     username: string,
     password: string,
-    email: string,
+    emailAddress: string,
     displayName: string
   ): Observable<any> {
     return this.httpClient.post(
       AUTH_API + 'register',
       {
-        uniqueId,
+        id,
         username,
         password,
-        email,
+        emailAddress,
         displayName,
       },
       httpOptions
     );
   }
+   //modify
+  public modify(
+      id: any,
+      username: string,
+      password: string,
+      emailAddress: string,
+      displayName: string
+    ): Observable<any> {
+      return this.httpClient.post(
+        AUTH_API + 'modify',
+        {
+          id,
+          username,
+          password,
+          emailAddress,
+          displayName,
+        },
+        httpOptions
+      );
+    }
 }
