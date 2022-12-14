@@ -36,24 +36,25 @@
             <td>{{ survey["title"] }}</td>
             <td>{{ survey["description"] }}</td>
             <td>{{ survey["surveyType"] }}</td>
-            <td>{{ survey["lifeTime"]}}</td>
+            <td>{{ survey["lifeTime"] }}</td>
             <td *ngIf="stillOpen; else closed">
-                <button class="btn btn-primary btn-sm" (click)="startSurvey(survey['_id'])">
-                  Start Survey
-                </button>
+              <button
+                class="btn btn-primary btn-sm"
+                (click)="startSurvey(survey['_id'])"
+              >
+                Start Survey
+              </button>
             </td>
             <ng-template #closed>
               <td>
-                <button class="btn btn-primary btn-sm" disabled>
-                  Closed!
-                </button>
+                <button class="btn btn-primary btn-sm" disabled>Closed!</button>
               </td>
             </ng-template>
-  
 
             <td *ngIf="isLoggedIn" class="text-center col-1">
               <button
                 class="btn btn-primary btn-sm"
+                [disabled]="!survey['ownerStatus']"
                 (click)="editSurvey(survey['_id'])"
               >
                 <i class="fas fa-pencil-alt"></i> Edit
@@ -63,6 +64,7 @@
             <td *ngIf="isLoggedIn" class="text-center col-1">
               <button
                 class="btn btn-danger btn-sm"
+                [disabled]="!survey['ownerStatus']"
                 (click)="deleteSurvey(survey['_id'])"
               >
                 <i class="fas fa-pencil-alt"></i> Delete

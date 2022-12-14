@@ -22,7 +22,7 @@ export class AuthService {
       httpOptions
     );
   }
-//QUESTIONABLE
+  //QUESTIONABLE
   public getUser(id: String): Observable<any> {
     return this.httpClient.get(AUTH_API + id, httpOptions);
   }
@@ -46,24 +46,24 @@ export class AuthService {
       httpOptions
     );
   }
-   //modify
+  //modify
   public modify(
-      id: any,
-      username: string,
-      password: string,
-      emailAddress: string,
-      displayName: string
-    ): Observable<any> {
-      return this.httpClient.post(
-        AUTH_API + 'modify',
-        {
-          id,
-          username,
-          password,
-          emailAddress,
-          displayName,
-        },
-        httpOptions
-      );
-    }
+    id: any,
+    username: string,
+    password: string,
+    emailAddress: string,
+    displayName: string
+  ): Observable<any> {
+    return this.httpClient.post(
+      AUTH_API + 'modify',
+      {
+        id,
+        username,
+        password,
+        emailAddress,
+        displayName,
+      },
+      httpOptions
+    );
+  }
 }

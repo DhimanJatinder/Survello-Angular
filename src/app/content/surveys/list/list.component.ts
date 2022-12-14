@@ -12,6 +12,7 @@ export class ListComponent implements OnInit {
   isLoggedIn = false;
   hasError = false;
   stillOpen = false;
+  isNotOwner = true;
 
   surveys: any = {
     _id: null,
@@ -20,7 +21,9 @@ export class ListComponent implements OnInit {
     surveyType: null,
     lifeTime: null,
     content: null,
+    owner: null,
     stillOpen: null,
+    ownerStatus: null,
   };
 
   constructor(
@@ -34,24 +37,27 @@ export class ListComponent implements OnInit {
     this.surveyService.getSurveysList().subscribe({
       next: (data: any) => {
         this.surveys = data.surveys;
-        for(let i = 0; i < this.surveys.length; i++)
-        {
+        const user: any = this.tokenStorage.getUser();
+
+        for (let i = 0; i < this.surveys.length; i++) {
+          if (user.id === this.surveys[i].owner) {
+            this.surveys[i].ownerStatus = true;
+            //console.log(this.surveys[i].ownerStatus);
+          }
+          console.log(this.surveys[i].ownerStatus);
+
           let number = parseInt(data.surveys[i].lifeTime);
           this.surveys[i].lifeTime = new Date(number);
-          console.log(this.surveys[i].lifeTime < new Date());
-          if(this.surveys[i].lifeTime < new Date())
-          {
+          //console.log(this.surveys[i].lifeTime < new Date());
+          if (this.surveys[i].lifeTime < new Date()) {
             this.surveys[i].stillOpen = false;
             this.stillOpen = false;
-
-          }
-          else{
+          } else {
             this.surveys[i].stillOpen = true;
             this.stillOpen = true;
           }
-
         }
-        
+
         this.hasError = false;
       },
       error: (err: any) => {
