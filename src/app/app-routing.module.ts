@@ -25,6 +25,7 @@ const routes: Routes = [
   { path: 'add/short-survey', component: ShortSurveyComponent },
   { path: 'edit/:id', component: EditComponent },
   { path: 'start/:id', component: StartComponent }
+
 ];
 
 @NgModule({
