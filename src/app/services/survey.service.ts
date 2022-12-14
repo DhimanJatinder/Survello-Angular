@@ -39,6 +39,7 @@ export class SurveyService {
     return this.httpClient.put(SURVEY_API + 'start/' + survey['_id'], survey, httpOptions);
   }
   completeSurvey(survey : any): Observable<any>{
+    console.log(survey);
     return this.httpClient.put(
       SURVEY_API + 'complete',survey,httpOptions
     )
