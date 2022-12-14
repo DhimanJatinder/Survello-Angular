@@ -8,7 +8,7 @@
     </div>
 
 
-    <form #f="ngForm" class="agreeForm" (ngSubmit)="onSubmit()">
+    <form #f="ngForm" class="agreeForm" (ngSubmit)="onSubmit()" >
       <div class="col">
           <div class="card">
             <div class="card-body text-center">
@@ -28,9 +28,9 @@
                 <p class="questionText" id="questionTextField {{i}}">{{question.question}}</p>
                 <div >
                 <ng-container *ngIf="agreeSurveyType">
-                  <input id= "agree{{i}}" type="radio" name="answer+{{i}}" [(ngModel)]="agreeArray[i]" value="Agree">Agree
-                  <input id= "disagree{{i}}" type="radio" name="answer+{{i}}" [(ngModel)]="agreeArray[i]" value="Disagree">Disagree
-                  <input id= "neutral{{i}}" type="radio" name="answer+{{i}}" [(ngModel)]="agreeArray[i]" value="Neutral">Neutral
+                  <input id= "agree{{i}}" type="radio" name="answer+{{i}}" [(ngModel)]="answerArray[i]" value="Agree" required/>Agree
+                  <input id= "disagree{{i}}" type="radio" name="answer+{{i}}" [(ngModel)]="answerArray[i]" value="Disagree" required/>Disagree
+                  <input id= "neutral{{i}}" type="radio" name="answer+{{i}}" [(ngModel)]="answerArray[i]" value="Neutral" required/>Neutral
                 </ng-container>
                 </div>
           
@@ -45,13 +45,11 @@
                 </ng-container>
          
                 <ng-container *ngIf="multiSurveyType">
-                  <label class="m-1 lead">Options for answer</label>
-                  <div class="input-group">
-                    <input id= "option1-{{i}}" type="radio" name="answer+{{i}}" [(ngModel)]="agreeFormComplete" value="survey.content[i]['option1']">{{survey.content[i]['option1']}}
-                    <input id= "option2-{{i}}" type="radio" name="answer+{{i}}" [(ngModel)]="agreeFormComplete" value="{{survey.content[i]['option2']}}">{{survey.content[i]['option2']}}
-                    <input id= "option3-{{i}}" type="radio" name="answer+{{i}}" [(ngModel)]="agreeFormComplete" value="{{survey.content[i]['option3']}}">{{survey.content[i]['option3']}}
-                    <input id= "option4-{{i}}" type="radio" name="answer+{{i}}" [(ngModel)]="agreeFormComplete" value="{{survey.content[i]['option4']}}">{{survey.content[i]['option4']}}
-                  </div>
+                  <input id= "agree{{i}}" type="radio" name="answer+{{i}}" [(ngModel)]="answerArray[i]" value="survey.content[i].option1" required/>{{survey.content[i].option1}}
+                  <input id= "disagree{{i}}" type="radio" name="answer+{{i}}" [(ngModel)]="answerArray[i]" value="survey.content[i]['option2']" required/>{{survey.content[i]['option2']}}
+                  <input id= "neutral{{i}}" type="radio" name="answer+{{i}}" [(ngModel)]="answerArray[i]" value="survey.content[i]['option3']" required/>{{survey.content[i]['option3']}}
+                  <input id= "neutral{{i}}" type="radio" name="answer+{{i}}" [(ngModel)]="answerArray[i]" value="survey.content[i]['option4']" required/>{{survey.content[i]['option4']}}
+
                 </ng-container>
         
 
@@ -60,7 +58,7 @@
                 <label for="feedbackTextArea">Survey Feedback:</label>
                 <textarea class="form-control" rows="4" cols="50"
                 id="feedbackTextArea"
-                [(ngModel)] = "survey.content[0].feedback"
+                [(ngModel)] = "answerSurvey.feedback"
                 placeholder="Please enter feedback"
                 name="feedback"
                 required

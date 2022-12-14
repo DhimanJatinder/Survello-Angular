@@ -54,14 +54,12 @@ export class EditComponent implements OnInit {
 
         this.surveyService.getSurvey(this.survey._id).subscribe({
           next: (data) => {
-            //console.log(data);
 
             this.survey = data.survey;
             if (this.survey.surveyType === 'Multiple Choice') {
               this.multiSurveyType = true;
             }
 
-            console.log(this.survey);
           },
           error: (err) => {
             this.errorMessage = err.error.message;
@@ -76,11 +74,11 @@ export class EditComponent implements OnInit {
     });
   }
   onSubmit(): void {
+    console.log(this.survey);
     this.surveyService.editSurvey(this.survey).subscribe({
       next: (data) => {
-        //console.log(data);
         this.isSuccessfull = true;
-        this.backToList();
+        //this.backToList();
       },
       error: (err) => {
         this.errorMessage = err.error.message;

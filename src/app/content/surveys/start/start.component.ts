@@ -10,6 +10,7 @@ import {
   Validators,
   NgModel
 } from '@angular/forms';
+import { NonNullAssert } from '@angular/compiler';
 
 @Component({
   selector: 'app-start',
@@ -24,16 +25,8 @@ export class StartComponent implements OnInit {
     agreeSurveyType = false;
     multiSurveyType = false;
     shortSurveyType = false;
-    agreeArray = [{}];
-
-
-    survey:any = {
-        _id: null,
-        title: null,
-        description: null,
-        content: []
-    };
-
+    answerArray = [{}];
+    questionArray=[];
   
     constructor(
       private surveyService: SurveyService,
@@ -42,34 +35,44 @@ export class StartComponent implements OnInit {
       private tokenStorage: TokenStorageService,
       private fb: FormBuilder,
    
-    ) {}
+    ) {};
 
-    shortFormComplete = this.fb.group({
-      title: this.fb.control('', Validators.required),
-      description: this.fb.control('', Validators.required),
-      surveyType: this.fb.control('Short Answer', Validators.required),
-      content: this.fb.array([]),
-    });
 
-    multiFormComp = this.fb.group({
-      title: this.fb.control('', Validators.required),
-      description: this.fb.control('', Validators.required),
-      surveyType: this.fb.control('Multiple Choice', Validators.required),
-      content: this.fb.array([]),
-    });
-    agreeFormComplete = this.fb.group({
-      title: this.fb.control('', Validators.required),
-      description: this.fb.control('', Validators.required),
-      surveyType: this.fb.control('Agree/Disagree', Validators.required),
-      content: this.fb.array([]),
-    });
+    survey: any = {
+        _id: null,
+        title: null,
+        description: null,
+        content: [],
+    };
+
+    answerSurvey: any ={
+      _id: null,
+      completeId: null,
+      title: null,
+      description: null,
+      content:[],
+      feedback: null
+    };
+
+    
 
 //Get the content of the form from the html
-  get content(): FormArray {
-    return this.survey.get('content') as FormArray;
+get content(): FormArray {
+  return this.survey.get('content') as FormArray;
+}
+
+
+eraseAndReplace(): void{
+  this.answerSurvey.content = [];
+  this.answerSurvey.completeId = Date.now();
+  delete this.answerSurvey.updatedAt;
+
+  for(let i = 0; i < this.answerArray.length; i++)
+  {
+    this.answerSurvey.content.push({question: this.questionArray[i]['question'], answer: this.answerArray[i]});
   }
-  //Push the answers to the content
- 
+  
+}
   ngOnInit(): void {
 
     this.isLoggedIn = !!this.tokenStorage.getToken();
@@ -77,12 +80,14 @@ export class StartComponent implements OnInit {
       next: params => {
 
         this.survey._id = params['id'];
-
+        
 
         this.surveyService.getSurvey(this.survey._id).subscribe({
           next: (data) => {
             this.survey = data.survey;
-            console.log(data.survey);
+            this.answerSurvey = data.survey;
+            this.questionArray = data.survey.content;
+            console.log(this.survey.content[0].option1);
             if (this.survey.surveyType === 'Multiple Choice') {
               this.multiSurveyType = true;
             }
@@ -102,8 +107,8 @@ export class StartComponent implements OnInit {
     });
   }
   onSubmit(): void {
-    console.log(this.agreeFormComplete.value);
-
+  this.eraseAndReplace();
+  console.log(this.answerSurvey);
     /*this.surveyService.completeSurvey(this.survey.value).subscribe({
       next: (data) => {
         this.isSuccessfull = true;
