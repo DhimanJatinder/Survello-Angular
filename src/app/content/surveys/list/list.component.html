@@ -23,6 +23,7 @@
             <th scope="col">Title</th>
             <th scope="col">Description</th>
             <th scope="col">Survey Type</th>
+            <th scope="col">Open Until</th>
             <th scope="col">Action</th>
             <th scope="col" *ngIf="isLoggedIn"></th>
             <th scope="col" *ngIf="isLoggedIn"></th>
@@ -35,11 +36,20 @@
             <td>{{ survey["title"] }}</td>
             <td>{{ survey["description"] }}</td>
             <td>{{ survey["surveyType"] }}</td>
-            <td>
-              <button class="btn btn-primary btn-sm" (click)="startSurvey(survey['_id'])">
-                Start Survey
-              </button>
+            <td>{{ survey["lifeTime"]}}</td>
+            <td *ngIf="stillOpen; else closed">
+                <button class="btn btn-primary btn-sm" (click)="startSurvey(survey['_id'])">
+                  Start Survey
+                </button>
             </td>
+            <ng-template #closed>
+              <td>
+                <button class="btn btn-primary btn-sm" disabled>
+                  Closed!
+                </button>
+              </td>
+            </ng-template>
+  
 
             <td *ngIf="isLoggedIn" class="text-center col-1">
               <button

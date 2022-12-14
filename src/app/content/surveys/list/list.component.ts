@@ -11,7 +11,17 @@ import { TokenStorageService } from 'src/app/services/token-storage.service';
 export class ListComponent implements OnInit {
   isLoggedIn = false;
   hasError = false;
-  surveys = [];
+  stillOpen = false;
+
+  surveys: any = {
+    _id: null,
+    title: null,
+    description: null,
+    surveyType: null,
+    lifeTime: null,
+    content: null,
+    stillOpen: null,
+  };
 
   constructor(
     private surveyService: SurveyService,
@@ -24,7 +34,24 @@ export class ListComponent implements OnInit {
     this.surveyService.getSurveysList().subscribe({
       next: (data: any) => {
         this.surveys = data.surveys;
-        //console.log(this.surveys);
+        for(let i = 0; i < this.surveys.length; i++)
+        {
+          let number = parseInt(data.surveys[i].lifeTime);
+          this.surveys[i].lifeTime = new Date(number);
+          console.log(this.surveys[i].lifeTime < new Date());
+          if(this.surveys[i].lifeTime < new Date())
+          {
+            this.surveys[i].stillOpen = false;
+            this.stillOpen = false;
+
+          }
+          else{
+            this.surveys[i].stillOpen = true;
+            this.stillOpen = true;
+          }
+
+        }
+        
         this.hasError = false;
       },
       error: (err: any) => {
