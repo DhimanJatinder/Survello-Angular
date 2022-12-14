@@ -8,6 +8,7 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SurveyService } from 'src/app/services/survey.service';
+import { TokenStorageService } from 'src/app/services/token-storage.service';
 
 @Component({
   selector: 'app-short-survey',
@@ -21,14 +22,18 @@ export class ShortSurveyComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private surveyService: SurveyService,
-    private router: Router
-  ) {}
+    private router: Router,
+    private tokenStorage : TokenStorageService
+    ) {}
+     user: any = this.tokenStorage.getUser();
 
   shortForm = this.fb.group({
     title: this.fb.control('', Validators.required),
     description: this.fb.control('', Validators.required),
     surveyType: this.fb.control('Short Answer', Validators.required),
+    lifeTime: this.fb.control(1,Validators.required),
     content: this.fb.array([]),
+    owner: this.user.id
   });
 
   get content(): FormArray {
@@ -49,6 +54,8 @@ export class ShortSurveyComponent implements OnInit {
     this.content.removeAt(quesIndex);
   }
   onSubmit(): void {
+    let x = this.shortForm.value.lifeTime!;
+    this.shortForm.value.lifeTime = new Date().setDate(new Date().getDate()+ x);
     this.surveyService.addSurvey(this.shortForm.value).subscribe({
       next: (data) => {
         console.log(data);

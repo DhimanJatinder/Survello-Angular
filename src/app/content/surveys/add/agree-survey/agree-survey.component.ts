@@ -8,6 +8,7 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SurveyService } from 'src/app/services/survey.service';
+import { TokenStorageService } from 'src/app/services/token-storage.service';
 
 @Component({
   selector: 'app-agree-survey',
@@ -17,20 +18,25 @@ import { SurveyService } from 'src/app/services/survey.service';
 export class AgreeSurveyComponent implements OnInit {
   isSuccessfull = true;
   errorMessage = '';
-
+  lifeTimeValue = 0 ;
   constructor(
     private fb: FormBuilder,
     private surveyService: SurveyService,
-    private router: Router
+    private router: Router,
+    private tokenStorage : TokenStorageService
   ) {}
+   user: any = this.tokenStorage.getUser();
 
   agreeForm = this.fb.group({
     title: this.fb.control('', Validators.required),
     description: this.fb.control('', Validators.required),
     surveyType: this.fb.control('Agree/Disagree', Validators.required),
+    lifeTime: this.fb.control(1,Validators.required),
     content: this.fb.array([]),
+    owner: this.user.id
   });
 
+  
   get content(): FormArray {
     return this.agreeForm.get('content') as FormArray;
   }
@@ -48,6 +54,9 @@ export class AgreeSurveyComponent implements OnInit {
     this.content.removeAt(quesIndex);
   }
   onSubmit(): void {
+    let x = this.agreeForm.value.lifeTime!;
+    this.agreeForm.value.lifeTime = new Date().setDate(new Date().getDate()+ x);
+
     this.surveyService.addSurvey(this.agreeForm.value).subscribe({
       next: (data) => {
         //console.log(data);
@@ -59,7 +68,7 @@ export class AgreeSurveyComponent implements OnInit {
         this.isSuccessfull = false;
       },
     });
-    // console.log(this.agreeForm.value);
+    // console.log(this.agreeForm.value);*/
   }
 
   backToList(): void {

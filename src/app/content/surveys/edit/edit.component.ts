@@ -54,7 +54,7 @@ export class EditComponent implements OnInit {
 
         this.surveyService.getSurvey(this.survey._id).subscribe({
           next: (data) => {
-
+            console.log(data.survey);
             this.survey = data.survey;
             if (this.survey.surveyType === 'Multiple Choice') {
               this.multiSurveyType = true;

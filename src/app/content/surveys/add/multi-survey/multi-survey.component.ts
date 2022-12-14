@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SurveyService } from 'src/app/services/survey.service';
+import { TokenStorageService } from 'src/app/services/token-storage.service';
 
 @Component({
   selector: 'app-multi-survey',
@@ -15,14 +16,19 @@ export class MultiSurveyComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private surveyService: SurveyService,
-    private router: Router
+    private router: Router,
+    private tokenStorage : TokenStorageService
+
   ) {}
+  user: any = this.tokenStorage.getUser();
 
   multiForm = this.fb.group({
     title: this.fb.control('', Validators.required),
     description: this.fb.control('', Validators.required),
     surveyType: this.fb.control('Multiple Choice', Validators.required),
+    lifeTime: this.fb.control(1,Validators.required),
     content: this.fb.array([]),
+    owner: this.user.id
   });
 
   get content(): FormArray {
@@ -46,6 +52,9 @@ export class MultiSurveyComponent implements OnInit {
   }
 
   onSubmit(): void {
+    let x = this.multiForm.value.lifeTime!;
+    this.multiForm.value.lifeTime = new Date().setDate(new Date().getDate()+ x);
+
     this.surveyService.addSurvey(this.multiForm.value).subscribe({
       next: (data) => {
         console.log(data);
