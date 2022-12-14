@@ -12,6 +12,7 @@ import { ShortSurveyComponent } from './content/surveys/add/short-survey/short-s
 import { StartComponent } from './content/surveys/start/start.component';
 import { EditComponent } from './content/surveys/edit/edit.component';
 import { ModifyComponent } from './content/auth/modify/modify.component';
+import { ReportComponent } from './content/surveys/report/report.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -26,7 +27,8 @@ const routes: Routes = [
   { path: 'add/short-survey', component: ShortSurveyComponent },
   { path: 'edit/:id', component: EditComponent },
   { path: 'start/:id', component: StartComponent },
-  { path: 'modify/:id', component: ModifyComponent}
+  { path: 'modify/:id', component: ModifyComponent},
+  { path: 'report', component: ReportComponent },
 
 ];
 

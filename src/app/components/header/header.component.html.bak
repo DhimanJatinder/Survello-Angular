@@ -53,19 +53,6 @@
           >
         </li>
 
-        <ng-container *ngIf="!isLoggedIn">
-          <li class="nav-item">
-            <a
-            routerLink="report"
-            class="nav-link"
-            aria-current="page"
-            href="/report"
-            routerLinkActive="active"
-            ><i class="fa-solid fa-table"></i>Report</a
-          >
-          </li>
-        </ng-container>
-
         <ng-container *ngIf="isLoggedIn; else showLoginTemplate">
          <li class="nav-item">
           <a
