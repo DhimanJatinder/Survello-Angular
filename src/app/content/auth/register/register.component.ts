@@ -12,6 +12,7 @@ export class RegisterComponent implements OnInit {
   errorMessage = '';
 
   form: any = {
+    uniqueId: Date.now(),
     firstName: null,
     lastName: null,
     emailAddress: null,
@@ -23,9 +24,9 @@ export class RegisterComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router) {}
 
   onSubmit(): void {
-    const { firstName, lastName, emailAddress, username, password } = this.form;
+    const { uniqueId, firstName, lastName, emailAddress, username, password } = this.form;
     this.authService
-      .register(username, password, emailAddress, firstName + lastName)
+      .register(uniqueId, username, password, emailAddress, firstName + lastName)
       .subscribe({
         next: (data) => {
           console.log(data);

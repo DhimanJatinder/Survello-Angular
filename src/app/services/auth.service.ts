@@ -24,6 +24,7 @@ export class AuthService {
   }
   //register
   public register(
+    uniqueId: any,
     username: string,
     password: string,
     email: string,
@@ -32,6 +33,7 @@ export class AuthService {
     return this.httpClient.post(
       AUTH_API + 'register',
       {
+        uniqueId,
         username,
         password,
         email,
