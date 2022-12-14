@@ -107,9 +107,9 @@ eraseAndReplace(): void{
     });
   }
   onSubmit(): void {
+    
   this.eraseAndReplace();
-  console.log(this.answerSurvey);
-    /*this.surveyService.completeSurvey(this.survey.value).subscribe({
+    this.surveyService.completeSurvey(this.answerSurvey.value).subscribe({
       next: (data) => {
         this.isSuccessfull = true;
         this.backToList();
@@ -118,7 +118,7 @@ eraseAndReplace(): void{
         this.errorMessage = err.error.message;
         this.isSuccessfull = false;
       },
-    });*/
+    });
   }
   backToList(): void {
     this.router.navigate(['list']);

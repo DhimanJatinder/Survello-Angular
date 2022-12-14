@@ -40,7 +40,7 @@ export class SurveyService {
   }
   completeSurvey(survey : any): Observable<any>{
     return this.httpClient.put(
-      SURVEY_API + 'complete/' + survey['_id'],survey,httpOptions
+      SURVEY_API + 'complete',survey,httpOptions
     )
   }
   //delete as survey
