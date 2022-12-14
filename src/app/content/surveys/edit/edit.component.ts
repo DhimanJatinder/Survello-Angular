@@ -86,6 +86,5 @@ export class EditComponent implements OnInit {
       },
     });
 
-    console.log(this.survey);
   }
 }
