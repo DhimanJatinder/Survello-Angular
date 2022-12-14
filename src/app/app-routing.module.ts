@@ -23,8 +23,8 @@ const routes: Routes = [
   { path: 'add/agree-survey', component: AgreeSurveyComponent },
   { path: 'add/multi-survey', component: MultiSurveyComponent },
   { path: 'add/short-survey', component: ShortSurveyComponent },
-  { path: 'edit/ :id', component: EditComponent },
-  { path: 'start/:id', component: StartComponent }
+  { path: 'edit/:id', component: EditComponent },
+  { path: 'start/:id', component: StartComponent },
 ];
 
 @NgModule({
