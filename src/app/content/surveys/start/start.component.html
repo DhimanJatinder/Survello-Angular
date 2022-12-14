@@ -1,0 +1,102 @@
+<div class="container">
+    <div class="row">
+      <h1 class="display-5">Start Survey</h1>
+    </div>
+    <div class="row">
+      <h1 class="display-6 text-center" *ngModel></h1>
+      <hr />
+    </div>
+    <form #f="ngForm" class="agreeForm" (ngSubmit)="onSubmit()">
+      <div class="col">
+          <div class="card">
+            <div class="card-body text-center">
+              <h5 class="card-title"></h5>
+              <div class="form-group">
+                <label for="titleTextField">Survey Title</label>
+                <input type="text" class="form-control"
+                id="titleTextField"
+                placeholder="Please enter survey title"
+                [(ngModel)]="survey.title"
+                name="title"
+                disabled
+                >
+              </div>
+              
+              <div class="form-group">
+                <label for="descriptionTextField">Description</label>
+                <input type="text" class="form-control"
+                id="descriptionTextField"
+                placeholder="Please enter description"
+                [(ngModel)]="survey.description"
+                name="description"
+                disabled
+                >
+              </div>
+              <div class="form-group" *ngFor="let question of survey.content; let i = index;">
+                <label for="questionTextField">Question:</label>
+                <input type="text" class="form-control"
+                id="questionTextField"
+                placeholder="Please enter question"
+                value="{{question.question}}"
+                name="question"
+                disabled
+                >
+                <ng-container *ngIf="multiSurveyType">
+                  <label class="m-1 lead">Options for answer</label>
+                  <div class="input-group">
+                    <input
+                      [(ngModel)]="survey.content[i]['option1']"
+                      #content="ngModel"
+                      name="option{{ i }}{{ i + 1 }}"
+                      class="form-control"
+                      type="text"
+                      placeholder="Option 1"
+                      disabled
+                    />
+                    <input
+                      [(ngModel)]="survey.content[i]['option2']"
+                      #content="ngModel"
+                      name="option{{ i }}{{ i + 2 }}"
+                      class="form-control"
+                      type="text"
+                      placeholder="Option 2"
+                      disabled
+                    />
+                    <input
+                      [(ngModel)]="survey.content[i]['option3']"
+                      #content="ngModel"
+                      name="option{{ i }}{{ i + 3 }}"
+                      class="form-control"
+                      type="text"
+                      placeholder="Option 3"
+                      disabled
+                    />
+                    <input
+                      [(ngModel)]="survey.content[i]['option4']"
+                      #content="ngModel"
+                      name="option{{ i }}{{ i + 4 }}"
+                      class="form-control"
+                      type="text"
+                      placeholder="Option 4"
+                      disabled
+                    />
+                  </div>
+                </ng-container>
+                <div *ngIf="survey" class="form-group">
+                  <label for="feedbackTextArea">Survey Feedback:</label>
+                  <textarea class="form-control" rows="4" cols="50"
+                  id="feedbackTextArea"
+                  [(ngModel)] = "survey.content[0].feedback"
+                  placeholder="Please enter feedback"
+                  name="feedback"
+                  required
+                  ></textarea>
+                </div>
+
+              </div>
+              <button type="submit" class="btn btn-success btn-lg m-3">Post Feedback</button>
+            </div>
+          </div>
+      </div>
+    </form>
+</div>

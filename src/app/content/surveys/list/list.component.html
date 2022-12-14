@@ -36,7 +36,9 @@
             <td>{{ survey["description"] }}</td>
             <td>{{ survey["surveyType"] }}</td>
             <td>
-              <button class="btn btn-primary btn-sm">Start Survey</button>
+              <button class="btn btn-primary btn-sm" (click)="startSurvey(survey['_id'])">
+                Start Survey
+              </button>
             </td>
 
             <td *ngIf="isLoggedIn" class="text-center col-1">

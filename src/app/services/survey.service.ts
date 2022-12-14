@@ -36,6 +36,9 @@ export class SurveyService {
       httpOptions
     );
   }
+  startSurvey(survey: any): Observable<any> {
+    return this.httpClient.put(SURVEY_API + 'start/' + survey['_id'], survey, httpOptions);
+  }
   //delete as survey
   deleteSurvey(id: string): Observable<any> {
     return this.httpClient.delete(SURVEY_API + 'delete/' + id, httpOptions);

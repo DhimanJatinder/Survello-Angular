@@ -46,6 +46,9 @@ export class ListComponent implements OnInit {
       },
     });
   }
+  startSurvey(id: string): void {
+    this.router.navigate(['/start/' + id]);
+  }
   reloadPage(): void {
     window.location.reload();
   }

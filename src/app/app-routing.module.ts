@@ -9,6 +9,7 @@ import { AddComponent } from './content/surveys/add/add.component';
 import { AgreeSurveyComponent } from './content/surveys/add/agree-survey/agree-survey.component';
 import { MultiSurveyComponent } from './content/surveys/add/multi-survey/multi-survey.component';
 import { ShortSurveyComponent } from './content/surveys/add/short-survey/short-survey.component';
+import { StartComponent } from './content/surveys/start/start.component';
 import { EditComponent } from './content/surveys/edit/edit.component';
 
 const routes: Routes = [
@@ -22,7 +23,8 @@ const routes: Routes = [
   { path: 'add/agree-survey', component: AgreeSurveyComponent },
   { path: 'add/multi-survey', component: MultiSurveyComponent },
   { path: 'add/short-survey', component: ShortSurveyComponent },
-  { path: 'edit/:id', component: EditComponent },
+  { path: 'edit/ :id', component: EditComponent },
+  { path: 'start/:id', component: StartComponent }
 ];
 
 @NgModule({
