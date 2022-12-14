@@ -24,6 +24,7 @@ export class StartComponent implements OnInit {
     agreeSurveyType = false;
     multiSurveyType = false;
     shortSurveyType = false;
+    agreeArray = [{}];
 
 
     survey:any = {
@@ -62,45 +63,13 @@ export class StartComponent implements OnInit {
       surveyType: this.fb.control('Agree/Disagree', Validators.required),
       content: this.fb.array([]),
     });
-    id_:any;
 
-    
+//Get the content of the form from the html
   get content(): FormArray {
     return this.survey.get('content') as FormArray;
   }
-  newAgreeAnswer(): FormGroup{
-    return this.fb.group({
-      question: ['', Validators.required],
-      answer: ['', Validators.required]
-    })
-  }
-  newMultiAnswer(): FormGroup{
-    return this.fb.group({
-      question: ['', Validators.required],
-      answer: ['', Validators.required]
-    })
-  }
-  newShortAnswer(): FormGroup{
-    return this.fb.group({
-      question: ['', Validators.required],
-      answer: ['', Validators.required]
-    })
-  }
-
-  addAgreeAnswer() {
-    //const control = new FormControl(null,Validators.required);
-    this.content.push(this.newAgreeAnswer());
-  }
-  
-  addMultiAnswer() {
-    //const control = new FormControl(null,Validators.required);
-    this.content.push(this.newMultiAnswer());
-  }
-
-  addShortAnswer() {
-    //const control = new FormControl(null,Validators.required);
-    this.content.push(this.newShortAnswer());
-  }
+  //Push the answers to the content
+ 
   ngOnInit(): void {
 
     this.isLoggedIn = !!this.tokenStorage.getToken();
@@ -133,8 +102,9 @@ export class StartComponent implements OnInit {
     });
   }
   onSubmit(): void {
+    console.log(this.agreeFormComplete.value);
 
-    this.surveyService.completeSurvey(this.survey).subscribe({
+    /*this.surveyService.completeSurvey(this.survey.value).subscribe({
       next: (data) => {
         this.isSuccessfull = true;
         this.backToList();
@@ -143,7 +113,7 @@ export class StartComponent implements OnInit {
         this.errorMessage = err.error.message;
         this.isSuccessfull = false;
       },
-    });
+    });*/
   }
   backToList(): void {
     this.router.navigate(['list']);

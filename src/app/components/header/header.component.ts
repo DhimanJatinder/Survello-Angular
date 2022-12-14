@@ -18,6 +18,8 @@ export class HeaderComponent implements OnInit {
 
     if (this.isLoggedIn) {
       const user: any = this.tokenStorage.getUser();
+      let str = "";
+      console.log(user);
       this.username = user.username;
     }
   }

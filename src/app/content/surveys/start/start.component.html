@@ -6,46 +6,31 @@
       <h1 class="display-6 text-center" *ngModel></h1>
       <hr />
     </div>
+
+
     <form #f="ngForm" class="agreeForm" (ngSubmit)="onSubmit()">
       <div class="col">
           <div class="card">
             <div class="card-body text-center">
               <h5 class="card-title"></h5>
               <div class="form-group">
-                <label for="titleTextField">Survey Title</label>
-                <input type="text" class="form-control"
-                id="titleTextField"
-                placeholder="Please enter survey title"
-                [(ngModel)]="survey.title"
-                name="title"
-                disabled
-                >
+                <label>Survey Title</label>
+                <p id="surveyTitle" placeholder="NO TITLE GIVEN">{{survey.title}}</p>
               </div>
               
               <div class="form-group">
                 <label for="descriptionTextField">Description</label>
-                <input type="text" class="form-control"
-                id="descriptionTextField"
-                placeholder="Please enter description"
-                [(ngModel)]="survey.description"
-                name="description"
-                disabled
-                >
+                <p class="descriptionText" id="descriptionTextField">{{survey.description}}</p>
+
               </div>
               <div class="form-group" *ngFor="let question of survey.content; let i = index;">
-                <label for="questionTextField">Question:</label>
-                <input type="text" class="form-control"
-                id="questionTextField"
-                placeholder="Please enter question"
-                value="{{question.question}}"
-                name="question"
-                disabled
-                >
+                <label for="questionTextField {{i}}">Question:</label>
+                <p class="questionText" id="questionTextField {{i}}">{{question.question}}</p>
                 <div >
                 <ng-container *ngIf="agreeSurveyType">
-                  <input id= "agree{{i}}" type="radio" name="answer+{{i}}" [(ngModel)]="agreeFormComplete" value="Agree">Agree
-                  <input id= "disagree{{i}}" type="radio" name="answer+{{i}}" [(ngModel)]="agreeFormComplete" value="Disagree">Disagree
-                  <input id= "neutral{{i}}" type="radio" name="answer+{{i}}" [(ngModel)]="agreeFormComplete" value="Neutral">Neutral
+                  <input id= "agree{{i}}" type="radio" name="answer+{{i}}" [(ngModel)]="agreeArray[i]" value="Agree">Agree
+                  <input id= "disagree{{i}}" type="radio" name="answer+{{i}}" [(ngModel)]="agreeArray[i]" value="Disagree">Disagree
+                  <input id= "neutral{{i}}" type="radio" name="answer+{{i}}" [(ngModel)]="agreeArray[i]" value="Neutral">Neutral
                 </ng-container>
                 </div>
           
@@ -71,7 +56,7 @@
         
 
               </div>
-              <div *ngIf="survey" class="form-group">
+              <div>
                 <label for="feedbackTextArea">Survey Feedback:</label>
                 <textarea class="form-control" rows="4" cols="50"
                 id="feedbackTextArea"
@@ -81,7 +66,7 @@
                 required
                 ></textarea>
               </div>
-              <button type="submit" class="btn btn-success btn-lg m-3">Post Feedback</button>
+              <button type="submit" class="btn btn-success btn-lg m-3" on>Submit Survey and Feedback</button>
             </div>
           </div>
       </div>
