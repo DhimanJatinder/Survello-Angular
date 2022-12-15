@@ -27,10 +27,10 @@
                 <label for="questionTextField {{i}}">Question:</label>
                 <p class="questionText" id="questionTextField {{i}}">{{question.question}}</p>
                 <div >
-                <ng-container *ngIf="agreeSurveyType">
-                  <input id= "agree{{i}}" type="radio" name="answer+{{i}}" [(ngModel)]="answerArray[i]" value="Agree" />Agree
-                  <input id= "disagree{{i}}" type="radio" name="answer+{{i}}" [(ngModel)]="answerArray[i]" value="Disagree" />Disagree
-                  <input id= "neutral{{i}}" type="radio" name="answer+{{i}}" [(ngModel)]="answerArray[i]" value="Neutral" />Neutral
+                <ng-container *ngIf="agreeSurveyType" ngNativeValidate>
+                  <input class ="multi" id= "agree{{i}}" type="radio" name="answer+{{i}}" [(ngModel)]="answerArray[i]" value="Agree" required/> Agree 
+                  <input class ="multi" id= "disagree{{i}}" type="radio" name="answer+{{i}}" [(ngModel)]="answerArray[i]" value="Disagree" /> Disagree 
+                  <input class ="multi" id= "neutral{{i}}" type="radio" name="answer+{{i}}" [(ngModel)]="answerArray[i]" value="Neutral" /> Neutral 
                 </ng-container>
                 </div>
           
@@ -44,11 +44,11 @@
                   ></textarea>
                 </ng-container>
          
-                <ng-container *ngIf="multiSurveyType">
-                  <input id= "agree{{i}}" type="radio" name="answer+{{i}}" [(ngModel)]="answerArray[i]" value="survey.content[i].option1" />{{survey.content[i].option1}}
-                  <input id= "disagree{{i}}" type="radio" name="answer+{{i}}" [(ngModel)]="answerArray[i]" value="survey.content[i]['option2']" />{{survey.content[i]['option2']}}
-                  <input id= "neutral{{i}}" type="radio" name="answer+{{i}}" [(ngModel)]="answerArray[i]" value="survey.content[i]['option3']" />{{survey.content[i]['option3']}}
-                  <input id= "neutral{{i}}" type="radio" name="answer+{{i}}" [(ngModel)]="answerArray[i]" value="survey.content[i]['option4']" />{{survey.content[i]['option4']}}
+                <ng-container *ngIf="multiSurveyType" ngNativeValidate>
+                  <input class ="multi" id= "agree{{i}}" type="radio" name="answer+{{i}}" [(ngModel)]="answerArray[i]" value="survey.content[i].option1" required/> {{survey.content[i].option1}} 
+                  <input class ="multi" id= "disagree{{i}}" type="radio" name="answer+{{i}}" [(ngModel)]="answerArray[i]" value="survey.content[i]['option2']" /> {{survey.content[i]['option2']}} 
+                  <input class ="multi" id= "neutral{{i}}" type="radio" name="answer+{{i}}" [(ngModel)]="answerArray[i]" value="survey.content[i]['option3']" /> {{survey.content[i]['option3']}} 
+                  <input class ="multi" id= "neutral{{i}}" type="radio" name="answer+{{i}}" [(ngModel)]="answerArray[i]" value="survey.content[i]['option4']" /> {{survey.content[i]['option4']}} 
 
                 </ng-container>
         

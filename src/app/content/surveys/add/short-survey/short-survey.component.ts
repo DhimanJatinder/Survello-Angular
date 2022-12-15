@@ -76,3 +76,7 @@ export class ShortSurveyComponent implements OnInit {
   }
   ngOnInit(): void {}
 }
+
+window.onload = function(){
+  document.getElementById("quesBut")?.click();
+}

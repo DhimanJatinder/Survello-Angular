@@ -16,9 +16,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-        <ng-container *ngIf="isLoggedIn">
-      
-        </ng-container>
+        
 
         <li class="nav-item">
           <a
@@ -53,7 +51,9 @@
           >
         </li>
 
-        <ng-container *ngIf="!isLoggedIn">
+  
+
+        <ng-container *ngIf="isLoggedIn; else showLoginTemplate">
           <li class="nav-item">
             <a
             routerLink="report"
@@ -64,9 +64,6 @@
             ><i class="fa-solid fa-table"></i>Report</a
           >
           </li>
-        </ng-container>
-
-        <ng-container *ngIf="isLoggedIn; else showLoginTemplate">
          <li class="nav-item">
           <a
           routerLink="modify/{{id}}"
@@ -78,7 +75,7 @@
         >
          </li> 
           <li class="nav-item">
-            <a class="nav-link" aria-current="page" (click)="logOut()"
+            <a class="nav-link" aria-current="page" (click)="logOut()" href="/home"
               ><i class="fa-solid fa-right-from-bracket fa-lg"></i> Logout</a
             >
           </li>

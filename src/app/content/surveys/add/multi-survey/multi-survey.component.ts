@@ -77,3 +77,7 @@ export class MultiSurveyComponent implements OnInit {
 
   ngOnInit(): void {}
 }
+
+window.onload = function(){
+  document.getElementById("quesBut")?.click();
+}

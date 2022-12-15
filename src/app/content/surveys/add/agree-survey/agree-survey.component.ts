@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import {
   FormArray,
   FormBuilder,
@@ -15,10 +15,14 @@ import { TokenStorageService } from 'src/app/services/token-storage.service';
   templateUrl: './agree-survey.component.html',
   styleUrls: ['./agree-survey.component.css'],
 })
+
+
 export class AgreeSurveyComponent implements OnInit {
   isSuccessfull = true;
   errorMessage = '';
   lifeTimeValue = 0 ;
+  @ViewChild('quesBut') myBut!: ElementRef;
+
   constructor(
     private fb: FormBuilder,
     private surveyService: SurveyService,
@@ -46,12 +50,17 @@ export class AgreeSurveyComponent implements OnInit {
       options: [['Agree', 'Disagree', 'Neutral'], Validators.required],
     });
   }
+  
   addQues() {
     //const control = new FormControl(null,Validators.required);
     this.content.push(this.newQues());
   }
   delQues(quesIndex: number) {
     this.content.removeAt(quesIndex);
+  }
+  ngOnInit(): void {
+    this.myBut.nativeElement.click();
+
   }
   onSubmit(): void {
     let x = this.agreeForm.value.lifeTime!;
@@ -73,5 +82,9 @@ export class AgreeSurveyComponent implements OnInit {
   backToList(): void {
     this.router.navigate(['list']);
   }
-  ngOnInit(): void {}
+  
 }
+/*
+window.onload = function(){
+  document.getElementById("quesBut")?.click();
+}*/

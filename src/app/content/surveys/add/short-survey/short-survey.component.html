@@ -6,15 +6,16 @@
   <div class="row">
     <p class="lead text-center">Enter the survey details</p>
   </div>
-  <form [formGroup]="shortForm" class="shortForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="shortForm" class="shortForm" (ngSubmit)="onSubmit()" ngNativeValidate>
     <div class="shortFormGroup">
       <div class="mb-3">
         <label for="title" class="form-label">Survey Title</label>
         <input
           formControlName="title"
-          type="email"
+          type="title"
           class="form-control"
           id="title"
+          required
         />
       </div>
 
@@ -27,6 +28,7 @@
           type="text"
           class="form-control"
           id="desc"
+          required
         />
       </div>
       <div class="mb-3">
@@ -39,10 +41,12 @@
           class="form-control"
           id="desc"
           min="1"
+          required
         />
       </div>
       <div class="text-center">
         <button
+          id="quesBut"
           type="button"
           class="btn btn-primary btn-lg"
           (click)="addQues()"
@@ -60,12 +64,26 @@
         <div class="form-group question">
           <label class="m-1 lead">Question {{ i + 1 }}</label>
 
-          <input
+          <textarea
             formControlName="question"
             class="form-control"
             type="text"
             id="i"
-          />
+            required
+          ></textarea>
+          <ng-container  *ngIf="i==0; else base" ngNativeValidate>
+            <div class="text-center">
+              <button
+                type="button"
+                class="btn btn-danger m-2"
+                (click)="delQues(i)"
+                disabled
+              >
+                Delete
+              </button>
+            </div>
+        </ng-container>
+        <ng-template #base>
           <div class="text-center">
             <button
               type="button"
@@ -75,6 +93,7 @@
               Delete
             </button>
           </div>
+        </ng-template>
         </div>
       </div>
     </div>

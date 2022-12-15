@@ -17,7 +17,7 @@ export class HomeComponent implements OnInit {
 
     if (this.isLoggedIn) {
       const user = this.tokenStorage.getUser();
-      console.log(user);
+      this.isLoggedIn = true;
     }
   }
 }
