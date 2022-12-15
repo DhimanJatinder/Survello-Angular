@@ -46,24 +46,31 @@ export class AuthService {
       httpOptions
     );
   }
+  //get user
+  getSingleUser(id: String): Observable<any> {
+    return this.httpClient.get(AUTH_API + ':' + id, httpOptions);
+  }
+
+  //modify
+  public modify(person: any, _id: String): Observable<any> {
+    return this.httpClient.put(AUTH_API + 'modify/' + _id, person, httpOptions);
+  }
+
+  /*
   //modify
   public modify(
     id: any,
     username: string,
-    password: string,
-    emailAddress: string,
     displayName: string
   ): Observable<any> {
     return this.httpClient.post(
       AUTH_API + 'modify',
       {
-        id,
         username,
-        password,
-        emailAddress,
         displayName,
       },
       httpOptions
     );
   }
+  */
 }

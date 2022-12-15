@@ -5,20 +5,24 @@ import { TokenStorageService } from 'src/app/services/token-storage.service';
 @Component({
   selector: 'app-modify',
   templateUrl: './modify.component.html',
-  styleUrls: ['./modify.component.css']
+  styleUrls: ['./modify.component.css'],
 })
 export class ModifyComponent implements OnInit {
-
   isSuccessfull = true;
   isNotChanged = false;
   isLoggedIn = false;
   errorMessage = '';
+  id = '';
 
-  constructor(private tokenStorage: TokenStorageService, private authService: AuthService,private route: ActivatedRoute, private router: Router) {}
-
+  constructor(
+    private tokenStorage: TokenStorageService,
+    private authService: AuthService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
   person: any = {
-    uniqueId : null,
+    uniqueId: null,
     firstName: null,
     lastName: null,
     emailAddress: null,
@@ -27,43 +31,37 @@ export class ModifyComponent implements OnInit {
     confirmPassword: null,
   };
 
+  ngOnInit(): void {
+    this.isLoggedIn = !!this.tokenStorage.getToken();
 
- ngOnInit(): void {
-
-  this.isLoggedIn = !!this.tokenStorage.getToken();
-      if(this.isLoggedIn)
-      {
-        const user: any = this.tokenStorage.getUser();
-        let x = user.displayName;
-        
-        this.person.username = user.username;
-        this.person.firstName  = x.slice(0, x.length/2);
-        this.person.lastName = x.slice(x.length/2, x.length);
-        this.person.emailAddress = user.emailAddress;
-      }
+    if (this.isLoggedIn) {
+      const user: any = this.tokenStorage.getUser();
+      let x: String = user.displayName;
+      let names = x.split(' ');
+      //console.log(names);
+      this.person.uniqueId = user.id;
+      this.person.username = user.username;
+      this.person.firstName = names[0];
+      this.person.lastName = names[1];
+      this.person.emailAddress = user.emailAddress;
+      console.log(user);
+    }
   }
 
-  /*
   onSubmit(): void {
-    const { uniqueId, firstName, lastName, emailAddress, username, password } = this.form;
-    this.authService
-      .register(uniqueId, username, password, emailAddress, firstName + lastName)
-      .subscribe({
-        next: (data) => {
-          console.log(data);
-          this.isSignedUpFailed = false;
-          this.goToHome();
-        },
-        error: (err) => {
-          this.errorMessage = err.error.message;
-          this.isSignedUpFailed = true;
-          this.errorMessage = 'Sign up failed. Please try again...';
-        },
-      });
+    console.log(this.person);
 
-  }
-  */
-  onSubmit():void {
+    const displayName: string = this.person.firstName + this.person.lastName;
 
+    this.authService.modify(this.person, this.person.uniqueId).subscribe({
+      next: () => {
+        this.isSuccessfull = true;
+        this.isNotChanged = true;
+      },
+      error: (err) => {
+        this.errorMessage = err.error.message;
+        this.isSuccessfull = false;
+      },
+    });
   }
 }
