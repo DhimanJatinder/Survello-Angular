@@ -40,13 +40,14 @@ export class ListComponent implements OnInit {
         const user: any = this.tokenStorage.getUser();
 
         for (let i = 0; i < this.surveys.length; i++) {
+          let number = parseInt(data.surveys[i].lifeTime);
+          this.surveys[i].lifeTime = new Date(number);
           if (user.id === this.surveys[i].owner) {
             this.surveys[i].ownerStatus = true;
           }
           console.log(this.surveys[i].ownerStatus);
 
-          let number = parseInt(data.surveys[i].lifeTime);
-          this.surveys[i].lifeTime = new Date(number);
+          
           if (this.surveys[i].lifeTime < new Date()) {
             this.surveys[i].stillOpen = false;
             this.stillOpen = false;
