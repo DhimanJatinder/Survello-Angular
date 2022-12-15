@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 const SURVEY_API = environment.apiUrl + '/surveys/';
+const COMPLETE_SURVEY_API = environment.apiUrl +'/completeSurveys/';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
 };
@@ -42,7 +43,7 @@ export class SurveyService {
   //FOR SUBMIT SURVEY
   completeSurvey(survey : Object): Observable<any>{
     console.log(survey);
-    return this.httpClient.post(SURVEY_API + 'complete', survey,httpOptions)
+    return this.httpClient.post(COMPLETE_SURVEY_API + 'complete', survey,httpOptions)
   }
   //delete as survey
   deleteSurvey(id: string): Observable<any> {

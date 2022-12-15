@@ -40,6 +40,7 @@ export class StartComponent implements OnInit {
 
     survey: any = {
         _id: null,
+        surveyId: null,
         title: null,
         description: null,
         content: [],
@@ -47,7 +48,7 @@ export class StartComponent implements OnInit {
 
     answerSurvey: any ={
       _id: null,
-      completeId: null,
+      surveyId: null,
       title: null,
       description: null,
       content:[],
@@ -65,7 +66,7 @@ get content(): FormArray {
 
 eraseAndReplace(): void{
   this.answerSurvey.content = [];
-  this.answerSurvey.completeId = Date.now();
+  this.answerSurvey._id = Date.now();
   delete this.answerSurvey.updatedAt;
 
   for(let i = 0; i < this.answerArray.length; i++)
@@ -81,10 +82,10 @@ eraseAndReplace(): void{
     this.route.params.subscribe({
       next: params => {
 
-        this.survey._id = params['id'];
+        this.survey.surveyId = params['id'];
         
 
-        this.surveyService.getSurvey(this.survey._id).subscribe({
+        this.surveyService.getSurvey(this.survey.surveyId).subscribe({
           next: (data) => {
             this.survey = data.survey;
             this.answerSurvey = data.survey;
