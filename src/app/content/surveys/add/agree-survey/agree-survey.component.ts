@@ -68,7 +68,6 @@ export class AgreeSurveyComponent implements OnInit {
         this.isSuccessfull = false;
       },
     });
-    // console.log(this.agreeForm.value);*/
   }
 
   backToList(): void {

@@ -6,7 +6,7 @@
   <div class="row">
     <p class="lead text-center">Enter the survey details</p>
   </div>
-  <form [formGroup]="agreeForm" class="agreeForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="agreeForm" class="agreeForm" (ngSubmit)="onSubmit()" ngNativeValidate>
     <div class="agreeFormGroup">
       <div class="mb-3">
         <label for="title" class="form-label">Survey Title</label>
@@ -52,7 +52,7 @@
       </div>
     </div>
 
-    <div formArrayName="content">
+    <div formArrayName="content" ngNativeValidate>
       <div
         *ngFor="let question of content.controls; let i = index"
         [formGroupName]="i"

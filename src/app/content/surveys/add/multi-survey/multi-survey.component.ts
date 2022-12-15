@@ -60,7 +60,7 @@ export class MultiSurveyComponent implements OnInit {
       next: (data) => {
         console.log(data);
         this.isSuccessfull = true;
-        //this.backToList();
+        this.backToList();
       },
       error: (err) => {
         this.errorMessage = err.error.message;

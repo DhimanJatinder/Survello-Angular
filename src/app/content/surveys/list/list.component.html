@@ -30,7 +30,6 @@
           </tr>
         </thead>
         <tbody id="surveyList">
-          <!--MOVIELIST WAS CHANGED TO SURVEYLIST HERE, FOR ERROR CHECKING-->
           <!-- Repeatable Rows -->
           <tr *ngFor="let survey of surveys">
             <td>{{ survey["title"] }}</td>
@@ -47,7 +46,7 @@
             </td>
             <ng-template #closed>
               <td>
-                <button class="btn btn-primary btn-sm" disabled>Closed!</button>
+                <button class="btn btn-primary btn-sm clsd" disabled>Closed!</button>
               </td>
             </ng-template>
 
