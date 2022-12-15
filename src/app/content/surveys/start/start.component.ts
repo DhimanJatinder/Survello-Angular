@@ -51,7 +51,8 @@ export class StartComponent implements OnInit {
       title: null,
       description: null,
       content:[],
-      feedback: null
+      feedback: null,
+      //owner: null
     };
 
     
@@ -76,6 +77,7 @@ eraseAndReplace(): void{
   ngOnInit(): void {
 
     this.isLoggedIn = !!this.tokenStorage.getToken();
+
     this.route.params.subscribe({
       next: params => {
 
@@ -109,7 +111,8 @@ eraseAndReplace(): void{
   onSubmit(): void {
     
   this.eraseAndReplace();
-    this.surveyService.completeSurvey(this.answerSurvey.value).subscribe({
+  //this.answerSurvey.user = this.tokenStorage
+    this.surveyService.completeSurvey(this.answerSurvey).subscribe({
       next: (data) => {
         this.isSuccessfull = true;
         this.backToList();

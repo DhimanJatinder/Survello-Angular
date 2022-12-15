@@ -52,6 +52,7 @@ export class MultiSurveyComponent implements OnInit {
   }
 
   onSubmit(): void {
+    
     let x = this.multiForm.value.lifeTime!;
     this.multiForm.value.lifeTime = new Date().setDate(new Date().getDate()+ x);
 
@@ -59,7 +60,7 @@ export class MultiSurveyComponent implements OnInit {
       next: (data) => {
         console.log(data);
         this.isSuccessfull = true;
-        this.backToList();
+        //this.backToList();
       },
       error: (err) => {
         this.errorMessage = err.error.message;
